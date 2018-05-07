@@ -1,0 +1,98 @@
+{
+  "name": "jest-phabricator-report",
+  "version": "1.0.0",
+  "description": "phabricator unit test report for jest",
+  "main": "index.js",
+  "repository": "https://github.com/coursera/jest-phabricator-report",
+  "author": "Gago <gago@coursera.org>",
+  "license": "MIT",
+  "engines": {
+    "node": ">6.10"
+  },
+  "lint-staged": {
+    "*.js": ["yarn format --write", "git add"]
+  },
+  "babel": {
+    "presets": [
+      "flow",
+      [
+        "env",
+        {
+          "targets": {
+            "node": "6.10"
+          },
+          "useBuiltIns": true
+        }
+      ]
+    ],
+    "plugins": ["transform-object-rest-spread", "source-map-support"]
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": "coursera",
+    "rules": {
+      "no-process-env": 0,
+      "import/no-dynamic-require": 0,
+      "no-console": 0,
+      "arrow-parens": [
+        0,
+        "as-needed",
+        {
+          "requireForBlockBody": true
+        }
+      ]
+    },
+    "globals": {
+      "process": true
+    }
+  },
+  "eslintIgnore": ["coverage/*"],
+  "prettier": {
+    "printWidth": 120,
+    "arrowParens": "always",
+    "semi": true,
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "useTabs": false,
+    "tabWidth": 2
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "format": "prettier-eslint --print-width=120",
+    "postinstall":
+      " which prettier 2>&1 > /dev/null && yarn format --write package.json || echo 'no prettier available for production'",
+    "test": "jest",
+    "build": "babel src --ignore 'src/__*' --source-maps inline --out-dir dist",
+    "lint": "eslint src/",
+    "flow": "flow"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "es6-promisify": "^6.0.0",
+    "source-map-support": "^0.5.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "^22.4.3",
+    "babel-plugin-source-map-support": "^2.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.19.1",
+    "eslint-config-coursera": "^0.5.0",
+    "eslint-plugin-flowtype": "^2.46.1",
+    "flow-bin": "^0.68.0",
+    "husky": "^0.14.3",
+    "jest": "^22.4.2",
+    "lint-staged": "^7.0.1",
+    "prettier": "^1.11.1",
+    "prettier-eslint": "^8.8.1",
+    "prettier-eslint-cli": "^4.7.1"
+  }
+}
