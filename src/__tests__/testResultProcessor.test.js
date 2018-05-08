@@ -10,7 +10,7 @@ const constants = require('../constants/');
 describe('jest-phabricator-report', () => {
   it('should generate valid json', () => {
     const noFailingTestsReport = require('../__mocks__/no-failing-tests.json');
-    
+
     process.env.buildTargetPHID = 'XXXX';
     const result = testResultProcessor(noFailingTestsReport);
 
