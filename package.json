@@ -2,7 +2,7 @@
   "name": "jest-phabricator-report",
   "version": "1.0.0",
   "description": "phabricator unit test report for jest",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/coursera/jest-phabricator-report",
   "author": "Gago <gago@coursera.org>",
   "license": "MIT",

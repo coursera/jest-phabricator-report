@@ -60,7 +60,10 @@ function getResultsPerSuite(path, testResults: TestsResults[], SEPARATOR): Phabr
   }));
 }
 
-function getTestResultforPhabricator({ testResults: testSuitResults }, SEPARATOR) {
+function trimPath(path, basePath) {
+  return path.replace(basePath, '');
+}
+function getTestResultforPhabricator({ testResults: testSuitResults }, { SEPARATOR, basePath, trimBasePath }) {
   return testSuitResults.reduce(
     (
       memo,
@@ -68,13 +71,14 @@ function getTestResultforPhabricator({ testResults: testSuitResults }, SEPARATOR
     ): PhabricatorUnitTestResult[] => {
       const duration = (end - start) / 1000;
       const result = numFailingTests ? 'fail' : 'pass';
+      const path = trimBasePath ? trimPath(name, basePath) : name;
       let summary = [];
       if (result === 'fail') {
-        summary = [...summary, ...getResultsPerSuite(name, results, SEPARATOR)];
+        summary = [...summary, ...getResultsPerSuite(path, results, SEPARATOR)];
       } else {
         summary.push({
           // we don't use `path` attribute given that the display on Phabricator is not optimal.
-          name,
+          path,
           result,
           duration,
         });
@@ -86,10 +90,14 @@ function getTestResultforPhabricator({ testResults: testSuitResults }, SEPARATOR
 }
 
 export default function(report: JestReport, options): PhabricatorUnitTestsJestReport {
-  const { buildTargetPHID, SEPARATOR } = options;
+  const { buildTargetPHID, SEPARATOR, trimBasePath, basePath } = options;
 
   if (!buildTargetPHID) {
     throw new Error('buildTargetPHID not present');
   }
-  return { buildTargetPHID, type: getReportResult(report), unit: getTestResultforPhabricator(report, SEPARATOR) };
+  return {
+    buildTargetPHID,
+    type: getReportResult(report),
+    unit: getTestResultforPhabricator(report, { SEPARATOR, trimBasePath, basePath }),
+  };
 }

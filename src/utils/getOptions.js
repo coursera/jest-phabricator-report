@@ -24,6 +24,8 @@ function getAppOptions(pathToResolve) {
 
       if (Object.prototype.toString.call(options) !== '[object Object]') {
         options = {};
+      } else {
+        options.basePath = pathToResolve;
       }
 
       return options;
