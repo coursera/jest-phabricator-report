@@ -1,9 +1,9 @@
-const mkdirp = require('mkdirp');
-const fs = require('fs');
-const path = require('path');
+import path from 'path';
+import mkdirp from 'mkdirp';
+import fs from 'fs';
 
-const buildJsonResults = require('./utils/buildJsonResults');
-const getOptions = require('./utils/getOptions');
+import buildJsonResults from './utils/buildJsonResults';
+import getOptions from './utils/getOptions';
 
 /*
   At the end of ALL of the test suites this method is called

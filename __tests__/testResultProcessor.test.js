@@ -1,5 +1,5 @@
-jest.mock('mkdirp');
 jest.mock('fs');
+jest.mock('mkdirp');
 
 const fs = require('fs');
 const path = require('path');
@@ -10,6 +10,8 @@ const constants = require('../constants/');
 describe('jest-phabricator-report', () => {
   it('should generate valid json', () => {
     const noFailingTestsReport = require('../__mocks__/no-failing-tests.json');
+    
+    process.env.buildTargetPHID = 'XXXX';
     const result = testResultProcessor(noFailingTestsReport);
 
     // Ensure fs.writeFileSync is called
@@ -21,7 +23,6 @@ describe('jest-phabricator-report', () => {
       expect.any(String)
     );
 
-    // Ensure generated file is valid xml
     expect(result).toMatchSnapshot();
   });
 });

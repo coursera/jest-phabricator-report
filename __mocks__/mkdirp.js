@@ -1,5 +1,6 @@
-module.exports = () => {
-  return Object.assign({}, require.requireActual('mkdirp'), {
-    sync: jest.fn(),
-  });
-};
+const mkdirp = () => ({
+  ...require.requireActual('mkdirp'),
+  sync: jest.fn(),
+});
+
+module.exports = mkdirp();
