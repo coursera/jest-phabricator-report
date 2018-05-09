@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`buildJsonResults should contain global result of the TestsSuits 1`] = `"pass"`;
+
+exports[`buildJsonResults should contain the correct shape for unit key 1`] = `
+Array [
+  Object {
+    "duration": 0.12,
+    "path": "/path/to/test/__tests__/foo.test.js",
+    "result": "pass",
+  },
+]
+`;
+
+exports[`buildJsonResults should expand when errors are found 1`] = `
+Object {
+  "buildTargetPHID": "XXXX",
+  "type": "fail",
+  "unit": Array [
+    Object {
+      "details": "[1m[31m  [1m● [1mSample Failing Test › Inner › Inner Inner › Should fail[39m[22m
+
+    foobar
+[2m      
+      [2mat _callee$ ([2m[0m[36mpath/to/failing.test.js[39m[0m[2m:26:15)[2m
+      [2mat tryCatch ([2m[0m[36mnode_modules/regenerator-runtime/runtime.js[39m[0m[2m:64:40)[2m
+      [2mat GeneratorFunctionPrototype.invoke [as _invoke] ([2m[0m[36mnode_modules/regenerator-runtime/runtime.js[39m[0m[2m:299:22)[2m
+      [2mat GeneratorFunctionPrototype.prototype.(anonymous function) [as next] ([2m[0m[36mnode_modules/regenerator-runtime/runtime.js[39m[0m[2m:116:21)[2m
+      [2mat step ([2m[0m[36mpath/to/failing.test.js[39m[0m[2m:2:394)[2m
+      [2mat [2m[0m[36mpath/to/failing.test.js[39m[0m[2m:2:554[2m[22m
+",
+      "duration": 3.93,
+      "name": "Should fail",
+      "namespace": "Sample Failing Test,Inner,Inner Inner",
+      "path": "/path/to/failing.test.js",
+      "result": "fail",
+    },
+  ],
+}
+`;
+
+exports[`buildJsonResults should fail if buildTargetPHID is not defined 1`] = `"buildTargetPHID not present"`;
