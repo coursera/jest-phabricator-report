@@ -1,5 +1,11 @@
 // @flow
 
+type Options = {
+  buildTargetPHID: string,
+  SEPARATOR: string,
+  trimBasePath: string,
+  basePath: string,
+};
 type TestsResults = {
   status: 'passed' | 'failed',
   failureMessages: string[],
@@ -27,7 +33,8 @@ type PhabricatorUnitTestResult = {
   path: string,
   result: 'pass' | 'fail',
   namespace: string,
-  detail: string,
+  duration: number,
+  details: string,
 };
 
 type PhabricatorUnitTestsJestReport = {
@@ -89,7 +96,7 @@ function getTestResultforPhabricator({ testResults: testSuitResults }, { SEPARAT
   );
 }
 
-export default function(report: JestReport, options): PhabricatorUnitTestsJestReport {
+export default function(report: JestReport, options: Options): PhabricatorUnitTestsJestReport {
   const { buildTargetPHID, SEPARATOR, trimBasePath, basePath } = options;
 
   if (!buildTargetPHID) {

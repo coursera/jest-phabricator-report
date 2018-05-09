@@ -1,5 +1,3 @@
-const getOptions = require('../utils/getOptions.js');
-
 jest.mock('fs');
 
 // Mock return of require('/package.json')

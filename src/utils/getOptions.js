@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: 0 */
 const path = require('path');
 const fs = require('fs');
 
@@ -14,6 +15,7 @@ function getAppOptions(pathToResolve) {
   let traversing = true;
 
   // Find nearest package.json by traversing up directories until /
+
   while (traversing) {
     traversing = pathToResolve !== path.sep;
 

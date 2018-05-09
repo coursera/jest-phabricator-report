@@ -67,10 +67,14 @@
     "postinstall":
       " which prettier 2>&1 > /dev/null && yarn format --write package.json || echo 'no prettier available for production'",
     "test": "jest",
-    "build": "babel src --ignore 'src/__*' --source-maps inline --out-dir dist",
-    "lint": "eslint src/",
+    "transpile": "babel src --ignore 'src/__*' --source-maps inline --out-dir dist",
+    "build": "yarn lint && yarn flow && yarn transpile && yarn createPackageJSON && yarn copyLICENCE",
+    "copyLICENCE": "cp LICENSE dist/",
+    "createPackageJSON": "node createPackageJSON.js && yarn format --write dist/package.json",
+    "lint": "eslint --fix src/",
     "flow": "flow"
   },
+  "files": ["dist/*"],
   "dependencies": {
     "debug": "^3.1.0",
     "es6-promisify": "^6.0.0",

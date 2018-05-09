@@ -1,3 +1,5 @@
+import { Option } from 'node-notifier/notifiers/growl';
+
 // @flow
 
 type TestsResults = {
@@ -56,7 +58,7 @@ function getResultsPerSuite(path, testResults: TestsResults[], SEPARATOR): Phabr
     duration: duration / 1000,
     result: PHABRICATOR_JEST_UNIT_RESULTS[status],
     namespace: ancestorTitles.join(SEPARATOR),
-    details: failureMessages.join(''),
+    detail: failureMessages.join(''),
   }));
 }
 
@@ -85,7 +87,7 @@ function getTestResultforPhabricator({ testResults: testSuitResults }, SEPARATOR
   );
 }
 
-export default function(report: JestReport, options): PhabricatorUnitTestsJestReport {
+export default function(report: JestReport, options: Options): PhabricatorUnitTestsJestReport {
   const { buildTargetPHID, SEPARATOR } = options;
 
   if (!buildTargetPHID) {
