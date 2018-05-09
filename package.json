@@ -68,7 +68,7 @@
       " which prettier 2>&1 > /dev/null && yarn format --write package.json || echo 'no prettier available for production'",
     "test": "jest",
     "transpile": "babel src --ignore 'src/__*' --source-maps inline --out-dir dist",
-    "build": "yarn lint && yarn flow && yarn transpile && yarn createPackageJSON && yarn copyLICENCE",
+    "build": "yarn lint && yarn flow && yarn transpile && yarn createPackageJSON && yarn copyLICENSE",
     "copyLICENSE": "cp LICENSE dist/",
     "createPackageJSON": "node createPackageJSON.js && yarn format --write dist/package.json",
     "lint": "eslint --fix src/",
