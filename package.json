@@ -69,7 +69,7 @@
     "test": "jest",
     "transpile": "babel src --ignore 'src/__*' --source-maps inline --out-dir dist",
     "build": "yarn lint && yarn flow && yarn transpile && yarn createPackageJSON && yarn copyLICENCE",
-    "copyLICENCE": "cp LICENSE dist/",
+    "copyLICENSE": "cp LICENSE dist/",
     "createPackageJSON": "node createPackageJSON.js && yarn format --write dist/package.json",
     "lint": "eslint --fix src/",
     "flow": "flow"

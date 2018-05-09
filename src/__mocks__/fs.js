@@ -1,6 +1,4 @@
-const fs = () => ({
+module.exports = {
   ...require.requireActual('fs'),
   writeFileSync: jest.fn(),
-});
-
-module.exports = fs();
+};

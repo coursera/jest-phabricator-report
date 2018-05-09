@@ -6,7 +6,7 @@ exports[`buildJsonResults should contain the correct shape for unit key 1`] = `
 Array [
   Object {
     "duration": 0.12,
-    "name": "/path/to/test/__tests__/foo.test.js",
+    "path": "/path/to/test/__tests__/foo.test.js",
     "result": "pass",
   },
 ]

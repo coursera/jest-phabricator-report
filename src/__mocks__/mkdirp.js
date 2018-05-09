@@ -1,6 +1,4 @@
-const mkdirp = () => ({
+module.exports = {
   ...require.requireActual('mkdirp'),
   sync: jest.fn(),
-});
-
-module.exports = mkdirp();
+};

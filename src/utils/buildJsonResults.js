@@ -14,7 +14,7 @@ type TestsResults = {
   duration: number,
 };
 
-type JestTestSuitsResults = {
+type JestTestSuitesResults = {
   numFailingTests: number,
   numPassingTests: number,
   testFilePath: string,
@@ -26,7 +26,7 @@ type JestReport = {
   numFailedTestSuites: number,
   numPassedTests: number,
   numTotalTests: number,
-  testResults: JestTestSuitsResults[],
+  testResults: JestTestSuitesResults[],
 };
 type PhabricatorUnitTestResult = {
   name: string,
@@ -70,11 +70,11 @@ function getResultsPerSuite(path, testResults: TestsResults[], SEPARATOR): Phabr
 function trimPath(path, basePath) {
   return path.replace(basePath, '');
 }
-function getTestResultforPhabricator({ testResults: testSuitResults }, { SEPARATOR, basePath, trimBasePath }) {
+function getTestResultForPhabricator({ testResults: testSuitResults }, { SEPARATOR, basePath, trimBasePath }) {
   return testSuitResults.reduce(
     (
       memo,
-      { testFilePath: name, testResults: results, numFailingTests, perfStats: { end, start } }: JestTestSuitsResults
+      { testFilePath: name, testResults: results, numFailingTests, perfStats: { end, start } }: JestTestSuitesResults
     ): PhabricatorUnitTestResult[] => {
       const duration = (end - start) / 1000;
       const result = numFailingTests ? 'fail' : 'pass';
@@ -105,6 +105,6 @@ export default function(report: JestReport, options: Options): PhabricatorUnitTe
   return {
     buildTargetPHID,
     type: getReportResult(report),
-    unit: getTestResultforPhabricator(report, { SEPARATOR, trimBasePath, basePath }),
+    unit: getTestResultForPhabricator(report, { SEPARATOR, trimBasePath, basePath }),
   };
 }

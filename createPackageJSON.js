@@ -4,7 +4,17 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 
-const exclude = ['main', 'devDependencies', 'scripts', 'eslintConfig', 'babel', 'prettier', 'lint-staged'];
+const exclude = [
+  'eslintIgnore',
+  'files',
+  'main',
+  'devDependencies',
+  'scripts',
+  'eslintConfig',
+  'babel',
+  'prettier',
+  'lint-staged',
+];
 
 let pkg;
 try {
@@ -20,7 +30,7 @@ const newPkg = Object.entries(pkg).reduce(
     }
     return memo;
   },
-  { main: 'dist/index.js' }
+  { main: 'index.js' }
 );
 
 if (process.env.DRY_RUN) {
